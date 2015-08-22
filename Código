@@ -1,0 +1,12 @@
+cc=gcc
+CFlAGS=-03
+
+all:obj
+	$(cc)-0 main *.0
+
+obj
+	$(cc) $FLAGS *.c
+
+clean
+
+	rm main 
