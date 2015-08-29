@@ -3,7 +3,7 @@
 
 int main()
 {
-    uint32_t registro[12],Rd,Rn,Rm;
+    uint32_t registro[12],Rd,Rn,Rm; //variables de prueba
     int OpcionSeleccion,Banderas[4];
 
     printf("Seleccione la funcion que desea probar:\n\n1:Mostrar Registro\n2:ADDS\n3:AND\n4:MOV\n5:ORR\n6:SUBS      \n\nOpcion: ");
@@ -22,7 +22,7 @@ int main()
             scanf("%d",&Rn);
             printf("Ingrese a Rm:  ");
             scanf("%d",&Rm);
-            Rd=ADDS(Rd,Rn,Rm);
+            Rd=ADDS(Rd,Rn,Rm);          //llamado de la funcion ADDS
             break;
 
         case 3:
@@ -30,13 +30,13 @@ int main()
             scanf("%d",&Rn);
             printf("Ingrese a Rm:  ");
             scanf("%d",&Rm);
-            Rd=AND(Rn,Rm);
+            Rd=AND(Rn,Rm);              //llamado de la funcion AND
             break;
 
         case 4:
             printf("Ingrese a Rn:  ");
             scanf("%d",&Rn);
-            Rd=MOV(Rn);
+            Rd=MOV(Rn);                 //llamado de la funcion MOV
             break;
 
         case 5:
@@ -44,7 +44,7 @@ int main()
             scanf("%d",&Rn);
             printf("Ingrese a Rm:  ");
             scanf("%d",&Rm);
-            Rd=ORR(Rn,Rm);
+            Rd=ORR(Rn,Rm);              //llamado de la funcion ORR
             break;
 
         case 6:
@@ -54,7 +54,7 @@ int main()
             scanf("%d",&Rn);
             printf("Ingrese a Rm:  ");
             scanf("%d",&Rm);
-            Rd=SUBS(Rd,Rn,Rm);
+            Rd=SUBS(Rd,Rn,Rm);           //llamado de la funcion SUBS
             break;
     }
 

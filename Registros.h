@@ -7,6 +7,6 @@
 * \param Valor1 Arreglo que contiene los registros
 * \return No hay retorno de la funcion
 */
-void MostrarRegistro(int registro[12]);
+void MostrarRegistro(uint32_t registro[]);
 
 

@@ -1,6 +1,6 @@
 #include "Registros.h"
 
-void MostrarRegistro(int registro[])
+void MostrarRegistro( uint32_t registro[])
 {
     int i;
     for (i=0;i<=12;i++)
