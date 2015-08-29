@@ -35,7 +35,7 @@ uint32_t SUBS(uint32_t Rd,uint32_t Rn,uint32_t Rm)
     return Rd;;
 }
 
-void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,uint32_t* Banderas)
+void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas)
 {
     uint32_t referencia=(2^32)/2;//2147483648
 
@@ -73,7 +73,7 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,uint32_t* Banderas)
     }
 
     //Bandera de sobre flujo
-    *(Banderas+1);
+    *(Banderas+3)=0;
 
 }
 

@@ -58,5 +58,5 @@ uint32_t SUBS(uint32_t Rd,uint32_t Rn,uint32_t Rm);
 * \param Banderas Arreglo donde se almacenara las banderas
 * \return No retorna
 */
-void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm, uint32_t* Banderas);
+void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas);
 
