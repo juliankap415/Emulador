@@ -1,32 +1,37 @@
 #include "Instrucciones.h"
 
 
-int ADDS(long int Registro1,long int Registro2)
+uint32_t ADDS(uint32_t Rd,uint32_t Rn,uint32_t Rm)
 {
-    return Registro1+Registro2;
+    Rd=Rn+Rm;
+
+    return Rd;
 }
 
-int AND(long int Registro1,long int Registro2)
+uint32_t AND(uint32_t Rn,uint32_t Rm)
 {
-    return Registro1&Registro2;
+    return Rn&Rm;
 }
 
-int EOR(long int Registro1,long int Registro2)
+uint32_t EOR(uint32_t Rn,uint32_t Rm)
 {
-    return Registro1^Registro2;
+    return Rn^Rm;
 }
 
-int MOV(long int Registro1,long int Registro2)
+uint32_t MOV(uint32_t Rn)
 {
-    return Registro2;
+    return Rn;
 }
 
-int ORR(long int Registro1,long int Registro2)
+uint32_t ORR(uint32_t Rn,uint32_t Rm)
 {
-    return Registro1|Registro2;
+    return Rn|Rm;
 }
 
-int SUBS(long int Registro1,long int Registro2)
+uint32_t SUBS(uint32_t Rd,uint32_t Rn,uint32_t Rm)
 {
-    return Registro1-Registro2;
+    Rd=Rn-Rm;
+
+    return Rd;;
 }
+
