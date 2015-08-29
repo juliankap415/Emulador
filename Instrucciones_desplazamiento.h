@@ -65,3 +65,7 @@ uint32_t RSB(uint32_t Rm);
 * \return entero sin signo de 32 bits
 */
 uint32_t REV(uint32_t Rd,uint32_t Rm);
+
+uint32_t REV16(uint32_t Rd,uint32_t Rm);
+
+uint32_t REVSH(uint32_t Rd,uint32_t Rm);

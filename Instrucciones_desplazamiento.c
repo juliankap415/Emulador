@@ -12,6 +12,7 @@ typedef union
     };
 }u32tobyte_t;
 
+
 uint32_t LSL(uint32_t Rd,uint32_t Rn,uint32_t Rm) //desplazamiento hacia la izquierda
 {
     Rd= Rn<<Rm; //bit de Rn se desplazan tantas veces indique Rm
@@ -74,6 +75,21 @@ uint32_t REV(uint32_t Rd,uint32_t Rm)
 
     R.data = Rm;
     Rd = (uint32_t)(R.byte0 << 24) | (uint32_t)(R.byte3) | (uint32_t)(R.byte1 << 16) | (uint32_t)(R.byte2 << 8);
+
+    return Rd;
+}
+
+uint32_t REV16(uint32_t Rd,uint32_t Rm)
+{
+    u32tobyte_t R;
+    R.data = Rm;
+    Rd = (uint32_t)(R.byte0 << 16) | (uint32_t)(R.byte3<<8) | (uint32_t)(R.byte1 << 24) | (uint32_t)(R.byte2);
+
+    return Rd;
+}
+
+uint32_t REVSH(uint32_t Rd,uint32_t Rm)
+{
 
 return Rd;
 }
