@@ -1,0 +1,7 @@
+doc/*
+bin/*
+*.o
+*.exe
+*.depend
+*.layout
+*.cbp
