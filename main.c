@@ -4,7 +4,7 @@
 int main()
 {
     uint32_t registro[12],Rd,Rn,Rm;
-    int OpcionSeleccion;
+    int OpcionSeleccion,Banderas[4];
 
     printf("Seleccione la funcion que desea probar:\n\n1:Mostrar Registro\n2:ADDS\n3:AND\n4:MOV\n5:ORR\n6:SUBS      \n\nOpcion: ");
     scanf("%d",&OpcionSeleccion);
@@ -58,7 +58,7 @@ int main()
             break;
     }
 
-    printf("\nSu resultado es %d",Rd);
+    printf("\nSu resultado es %d\nLas banderas son: N:%d   Z:%d   C:%d   V:%d",Rd,Banderas[0],Banderas[1],Banderas[2],Banderas[3]);
 
 
     return 0;
