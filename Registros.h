@@ -1,7 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+
 /**
-* \brief funcion muestra el registro
-* \param registro[12] Arreglo que contiene el registro
-* \return No retorna
+* \brief funcion que muestra el registro
+* \param Valor1 Arreglo que contiene los registros
+* \return No hay retorno de la funcion
 */
 void MostrarRegistro(int registro[12]);
 
