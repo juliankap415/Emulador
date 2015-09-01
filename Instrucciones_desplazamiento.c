@@ -31,7 +31,7 @@ uint32_t ROR(uint32_t Rd,uint32_t Rm)
 {
     uint32_t aux1,aux2; //variables auxiiares
     aux1=Rd>>Rm;        //aux1 almacenara los primeros bits
-    aux2=Rm<<(32-Rm);   //aux2 almacenara los ultimos bis
+    aux2=Rd<<(32-Rm);   //aux2 almacenara los ultimos bis
 
     return aux1+aux2;
 }

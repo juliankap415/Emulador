@@ -1,11 +1,11 @@
 cc = gcc
-CFlAGS = -O3 -c -Wall
+CFLAGS = -O3 -c -Wall
 
-all:	obj
+all:	o
 	$(cc) -o main.exe *.o
 	rm *.o
 
-obj:
+o :
 	$(cc) $(CFLAGS) *.c
 
 clean:
