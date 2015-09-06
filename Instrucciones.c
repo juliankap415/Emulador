@@ -77,4 +77,25 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas)
 
 }
 
+void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm)
+{
+    int Banderas[4],*puntero=Banderas;
+    BANDERAS(Rn+Rm,Rn,Rm,puntero);
+}
 
+void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm)
+{
+    int Banderas[4],*puntero=Banderas;
+    BANDERAS(Rn-Rm,Rn,Rm,puntero);
+}
+
+uint32_t MUL(uint32_t Rd,uint32_t Rn,uint32_t Rm)
+{
+    return Rd=Rn*Rm;
+}
+
+void TST(uint32_t Rd,uint32_t Rn,uint32_t Rm)
+{
+    int Banderas[4],*puntero=Banderas;
+    BANDERAS(Rn&Rm,Rn,Rm,puntero);
+}

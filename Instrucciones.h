@@ -60,3 +60,11 @@ uint32_t SUBS(uint32_t Rd,uint32_t Rn,uint32_t Rm);
 */
 void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas);
 
+void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+
+void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+
+uint32_t MUL(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+
+void TST(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+
