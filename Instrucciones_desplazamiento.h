@@ -8,7 +8,7 @@
 * \param Rm Numero de desplazamientos
 * \return entero sin signo de 32 bits
 */
-uint32_t LSL(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void LSL(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Desplazamiento logico a la derecha
@@ -17,7 +17,7 @@ uint32_t LSL(uint32_t Rd,uint32_t Rn,uint32_t Rm);
 * \param Rm Numero de desplazamientos
 * \return entero sin signo de 32 bits
 */
-uint32_t LSR(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void LSR(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Rotacion a la derecha
@@ -25,7 +25,7 @@ uint32_t LSR(uint32_t Rd,uint32_t Rn,uint32_t Rm);
 * \param Rm Numero de desplazamientos
 * \return entero sin signo de 32 bits
 */
-uint32_t ROR(uint32_t Rd,uint32_t Rm);
+void ROR(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Desplazamiento aritmetico a la derecha
@@ -34,7 +34,7 @@ uint32_t ROR(uint32_t Rd,uint32_t Rm);
 * \param Rm Numero de desplazamientos
 * \return entero sin signo de 32 bits
 */
-uint32_t ASR(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void ASR(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Operacion logica AND entre un dato y el complemento del otro dato
@@ -42,21 +42,21 @@ uint32_t ASR(uint32_t Rd,uint32_t Rn,uint32_t Rm);
 * \param Rn Segundo operador de la operacion AND, al cual se le hara el complemento
 * \return entero sin signo de 32 bits
 */
-uint32_t BIC(uint32_t Rd,uint32_t Rm);
+void BIC(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Guardar el complemento de un dato
 * \param Rm Dato al que se le hara el complemento
 * \return entero sin signo de 32 bits
 */
-uint32_t MVN(uint32_t Rm);
+void MVN(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Complemento a dos
 * \param Rm Dato al que se le hara el complemento a dos
 * \return entero sin signo de 32 bits
 */
-uint32_t RSB(uint32_t Rm);
+void RSB(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Cambiar el orden de los bytes
@@ -64,8 +64,8 @@ uint32_t RSB(uint32_t Rm);
 * \param Rm Datos que se modificara en bytes
 * \return entero sin signo de 32 bits
 */
-uint32_t REV(uint32_t Rd,uint32_t Rm);
+void REV(uint32_t *Rdn,uint32_t Rm,int *flags);
 
-uint32_t REV16(uint32_t Rd,uint32_t Rm);
+void REV16(uint32_t *Rdn,uint32_t Rm,int *flags);
 
-uint32_t REVSH(uint32_t Rd,uint32_t Rm);
+void REVSH(uint32_t Rd,uint32_t Rm,int *flags);

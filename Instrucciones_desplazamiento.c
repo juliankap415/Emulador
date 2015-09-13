@@ -1,4 +1,5 @@
 #include "Instrucciones_desplazamiento.h"
+#include "Instrucciones.h"
 
 typedef union
 {
@@ -12,84 +13,73 @@ typedef union
     };
 }u32tobyte_t;
 
-
-uint32_t LSL(uint32_t Rd,uint32_t Rn,uint32_t Rm) //desplazamiento hacia la izquierda
+void LSL(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la izquierda
 {
-    Rd= Rn<<Rm; //bit de Rn se desplazan tantas veces indique Rm
-
-    return Rd;
+    *Rdn=*Rdn<<Rm; //bit de Rn se desplazan tantas veces indique Rm
+    BANDERAS(*Rd,0,0,flags);
 }
 
-uint32_t LSR(uint32_t Rd,uint32_t Rn,uint32_t Rm) //desplazamiento hacia la derecha
+void LSR(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la derecha
 {
-    Rd= Rn>>Rm; //bit de Rn se desplazan tantas veces indique Rm
-
-    return Rd;
+    *Rdn=*Rdn>>Rm; //bit de Rn se desplazan tantas veces indique Rm
+    BANDERAS(*Rd,0,0,flags);
 }
 
-uint32_t ROR(uint32_t Rd,uint32_t Rm)
+void ROR(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     uint32_t aux1,aux2; //variables auxiiares
-    aux1=Rd>>Rm;        //aux1 almacenara los primeros bits
-    aux2=Rd<<(32-Rm);   //aux2 almacenara los ultimos bis
-
-    return aux1+aux2;
+    aux1=*Rdn>>Rm;        //aux1 almacenara los primeros bits
+    aux2=*Rdn<<(32-Rm);   //aux2 almacenara los ultimos bits
+    *Rdn=aux1+aux2;
+    BANDERAS(*Rdn,0,0,flags);
 }
 
-uint32_t ASR(uint32_t Rd,uint32_t Rn,uint32_t Rm)
+void ASR(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     uint32_t aux;
 
-    aux=Rn>>31;     //conocer el signo del numero
-
-    if(aux==0)      //numero con signo positivo
-    {
-        Rd=Rn>>Rm;
-    }
-    else            //numero con signo negativo
-    {
-        Rd=Rn>>Rm;
-        aux=aux<<Rm;
-    }
-    return Rd+aux;
+    aux=*Rdn>>31;     //conocer el signo del numero
+    aux=aux<<31;
+    *Rdn=*Rdn>>Rm;
+    *Rdn=*Rdn+aux;
+    BANDERAS(*Rdn,0,0,flags);
 }
 
-uint32_t BIC(uint32_t Rd,uint32_t Rm)
+void BIC(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
-    return Rd&(~Rm);
+    *Rdn=Rdn&(~Rm);
+    BANDERAS(*Rdn,0,0,flags);
 }
 
-uint32_t MVN(uint32_t Rm)
+void MVN(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
-    return ~Rm;
+    *Rdn=~Rm;
+    BANDERAS(*Rdn,0,0,flags);
 }
 
-uint32_t RSB(uint32_t Rm)
+void RSB(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
-    return ~Rm+1;
+    *Rdn=~Rm+1;
+    BANDERAS(*Rdn,0,0,flags);
 }
 
-uint32_t REV(uint32_t Rd,uint32_t Rm)
+void REV(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     u32tobyte_t R;
 
     R.data = Rm;
-    Rd = (uint32_t)(R.byte0 << 24) | (uint32_t)(R.byte3) | (uint32_t)(R.byte1 << 16) | (uint32_t)(R.byte2 << 8);
-
-    return Rd;
+    *Rdn= (uint32_t)(R.byte0 << 24) | (uint32_t)(R.byte3) | (uint32_t)(R.byte1 << 16) | (uint32_t)(R.byte2 << 8);
+    BANDERAS(*Rdn,0,0,flags);
 }
 
-uint32_t REV16(uint32_t Rd,uint32_t Rm)
+void REV16(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     u32tobyte_t R;
     R.data = Rm;
-    Rd = (uint32_t)(R.byte0 << 16) | (uint32_t)(R.byte3<<8) | (uint32_t)(R.byte1 << 24) | (uint32_t)(R.byte2);
-
-    return Rd;
+    Rdn = (uint32_t)(R.byte0 << 16) | (uint32_t)(R.byte3<<8) | (uint32_t)(R.byte1 << 24) | (uint32_t)(R.byte2);
+    BANDERAS(*Rdn,0,0,flags);
 }
 
-uint32_t REVSH(uint32_t Rd,uint32_t Rm)
+void REVSH(uint32_t Rd,uint32_t Rm,int *flags)
 {
-
-return Rd;
 }

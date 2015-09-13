@@ -1,43 +1,69 @@
 #include "Instrucciones.h"
 
-
-uint32_t ADDS(uint32_t Rd,uint32_t Rn,uint32_t Rm)
+void ADDS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    Rd=Rn+Rm;
-
-    return Rd;
+    *Rd=Rn+Rm;
+    BANDERAS(Rd,Rn,Rm,flags);
 }
 
-uint32_t AND(uint32_t Rn,uint32_t Rm)
+void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    return Rn&Rm;
+    *Rd=Rn&Rm;
+    BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-uint32_t EOR(uint32_t Rn,uint32_t Rm)
+void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    return Rn^Rm;
+    *Rd=Rn^Rm;
+    BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-uint32_t MOV(uint32_t Rn)
+void MOV(uint32_t *Rd,uint32_t Rn)
 {
-    return Rn;
+    *Rd=Rn;
 }
 
-uint32_t ORR(uint32_t Rn,uint32_t Rm)
+void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    return Rn|Rm;
+    *Rd=Rn|Rm;
+    BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-uint32_t SUBS(uint32_t Rd,uint32_t Rn,uint32_t Rm)
+void SUBS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    Rd=Rn-Rm;
-
-    return Rd;;
+    *Rd=Rn-Rm;
+    BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas)
+void CMN(uint32_t Rn,uint32_t Rm,int *flags)
 {
-    uint32_t referencia=(2^32)/2;//2147483648
+    BANDERAS(Rn+Rm,0,0,flags);
+}
+
+void CMP(uint32_t Rn,uint32_t Rm,int *flags)
+{
+    BANDERAS(Rn-Rm,0,0,flags);
+}
+
+void MUL(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
+{
+    *Rd=Rn*Rm;
+    BANDERAS(*Rd,Rn,Rm,flags);
+}
+
+void TST(uint32_t Rn,uint32_t Rm,int *flags)
+{
+    BANDERAS(Rn&Rm,0,0,flags);
+}
+
+void NOP()
+{
+
+}
+
+void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)
+{
+    uint32_t referencia=2147483647;
 
     //Bandera de negativo
     if (Rd>referencia)
@@ -62,7 +88,7 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas)
     }
 
     //Bandera de acarreo
-    if (Rd>((referencia*2)-1))
+    if (Rd>(referencia))
     {
         *(Banderas+2)=1;
     }
@@ -73,29 +99,17 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas)
     }
 
     //Bandera de sobre flujo
-    *(Banderas+3)=0;
-
+    if((Rn&(referencia)) == (Rm&referencia))
+	{
+		if((Rn&referencia) != (Rd&referencia))
+		{
+			*(Banderas+3)=1; // bandera de sobreflujo igual a 1
+		}
+	}
+	else
+	{
+		*(Banderas+3)=0;
+	}
 }
 
-void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm)
-{
-    int Banderas[4],*puntero=Banderas;
-    BANDERAS(Rn+Rm,Rn,Rm,puntero);
-}
 
-void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm)
-{
-    int Banderas[4],*puntero=Banderas;
-    BANDERAS(Rn-Rm,Rn,Rm,puntero);
-}
-
-uint32_t MUL(uint32_t Rd,uint32_t Rn,uint32_t Rm)
-{
-    return Rd=Rn*Rm;
-}
-
-void TST(uint32_t Rd,uint32_t Rn,uint32_t Rm)
-{
-    int Banderas[4],*puntero=Banderas;
-    BANDERAS(Rn&Rm,Rn,Rm,puntero);
-}

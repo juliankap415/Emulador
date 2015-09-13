@@ -8,7 +8,7 @@
 * \param Rm Segundo dato a realizar la operacion
 * \return entero sin signo de 32 bits
 */
-uint32_t ADDS(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void ADDS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion realiza operación lógica AND bit a bit
@@ -16,7 +16,7 @@ uint32_t ADDS(uint32_t Rd,uint32_t Rn,uint32_t Rm);
 * \param Rm Primer dato a realizar la operacion
 * \return entero sin signo de 32 bits
 */
-uint32_t AND(uint32_t Rn,uint32_t Rm);
+void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion realiza operación lógica X-OR bit a bit
@@ -24,14 +24,14 @@ uint32_t AND(uint32_t Rn,uint32_t Rm);
 * \param Rm Primer registro a relizar operacion
 * \return entero sin signo de 32 bits
 */
-uint32_t EOR(uint32_t Rn,uint32_t Rm);
+void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion realiza una copia
 * \param Rn Dato al que se le realizara una copia
 * \return entero sin signo de 32 bits
 */
-uint32_t MOV(uint32_t Rn);
+void MOV(uint32_t *Rd,uint32_t Rn);
 
 /**
 * \brief Funcion realiza operación logica OR bit a bit
@@ -39,7 +39,7 @@ uint32_t MOV(uint32_t Rn);
 * \param Rm Primer registro a relizar operacion
 * \return entero sin signo de 32 bits
 */
-uint32_t ORR(uint32_t Rn,uint32_t Rm);
+void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion resta
@@ -48,23 +48,16 @@ uint32_t ORR(uint32_t Rn,uint32_t Rm);
 * \param Rm Segundo dato a realizar la operación
 * \return entero sin signo de 32 bits
 */
-uint32_t SUBS(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void SUBS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
-/**
-* \brief Funcion realiza la activacion de las banderas
-* \param Rd Dato principal a verificar la activacion de banderas
-* \param Rn Primer dato de la operacion
-* \param Rm Segundo dato de la operacion
-* \param Banderas Arreglo donde se almacenara las banderas
-* \return No retorna
-*/
-void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int* Banderas);
+void CMN(uint32_t Rn,uint32_t Rm,int *flags);
 
-void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void CMP(uint32_t Rn,uint32_t Rm,int *flags);
 
-void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void MUL(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
-uint32_t MUL(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void TST(uint32_t Rn,uint32_t Rm,int *flags);
 
-void TST(uint32_t Rd,uint32_t Rn,uint32_t Rm);
+void NOP();
 
+void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas);
