@@ -16,13 +16,13 @@ typedef union
 void LSL(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la izquierda
 {
     *Rdn=*Rdn<<Rm; //bit de Rn se desplazan tantas veces indique Rm
-    BANDERAS(*Rd,0,0,flags);
+    BANDERAS(*Rdn,0,0,flags);
 }
 
 void LSR(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la derecha
 {
     *Rdn=*Rdn>>Rm; //bit de Rn se desplazan tantas veces indique Rm
-    BANDERAS(*Rd,0,0,flags);
+    BANDERAS(*Rdn,0,0,flags);
 }
 
 void ROR(uint32_t *Rdn,uint32_t Rm,int *flags)
@@ -47,7 +47,7 @@ void ASR(uint32_t *Rdn,uint32_t Rm,int *flags)
 
 void BIC(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
-    *Rdn=Rdn&(~Rm);
+    *Rdn=*Rdn&(~Rm);
     BANDERAS(*Rdn,0,0,flags);
 }
 
@@ -76,7 +76,7 @@ void REV16(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     u32tobyte_t R;
     R.data = Rm;
-    Rdn = (uint32_t)(R.byte0 << 16) | (uint32_t)(R.byte3<<8) | (uint32_t)(R.byte1 << 24) | (uint32_t)(R.byte2);
+    *Rdn = (uint32_t)(R.byte0 << 16) | (uint32_t)(R.byte3<<8) | (uint32_t)(R.byte1 << 24) | (uint32_t)(R.byte2);
     BANDERAS(*Rdn,0,0,flags);
 }
 

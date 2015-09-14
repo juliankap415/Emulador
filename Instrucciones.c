@@ -3,7 +3,7 @@
 void ADDS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     *Rd=Rn+Rm;
-    BANDERAS(Rd,Rn,Rm,flags);
+    BANDERAS(*Rd,Rn,Rm,flags);
 }
 
 void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
