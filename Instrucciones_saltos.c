@@ -1,22 +1,23 @@
+
 #include "Instrucciones_saltos.h"
 
-void EQ(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BEQ(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
-    if (*(Banderas+1)==1)
+    if (*(Banderas+1)==1)                           //Condicion para poder realizar el salto
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;                                  //Se realiza el salto a la direccion especifica
     }
     else
     {
-        *PC=*PC+1;
+        *PC=*PC+2;                                  //No se realiza el salto y va a la siguiente direccion
     }
 }
 
-void NE(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BNE(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if (*(Banderas+1)==0)
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -24,11 +25,11 @@ void NE(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void CS(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BCS(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if (*(Banderas+2)==1)
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -36,11 +37,11 @@ void CS(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void CC(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BCC(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if (*(Banderas+2)==0)
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -48,11 +49,11 @@ void CC(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void MI(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BMI(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if (*(Banderas+0)==1)
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -60,11 +61,11 @@ void MI(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void PL(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BPL(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if (*(Banderas+0)==0)
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -72,11 +73,11 @@ void PL(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void VS(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BVS(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if (*(Banderas+3)==1)
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -84,11 +85,11 @@ void VS(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void VC(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BVC(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if (*(Banderas+3)==0)
     {
-        *PC=*PC+Saltos;
+        *PC=*PC+Salto;
     }
     else
     {
@@ -96,11 +97,11 @@ void VC(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void HI(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BHI(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if ((*(Banderas+2)==1)&&(*(Banderas+1)==0))
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -108,11 +109,11 @@ void HI(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void LS(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BLS(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if ((*(Banderas+2)==0)&&(*(Banderas+1)==1))
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -120,11 +121,11 @@ void LS(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void GE(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BGE(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if ((*(Banderas+0)==(*(Banderas+3))))
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -132,11 +133,11 @@ void GE(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void LT(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BLT(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if ((*(Banderas+0)!=(*(Banderas+3))))
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -144,11 +145,11 @@ void LT(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void GT(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BGT(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if ((*(Banderas+1)==0)&&(*(Banderas+0)==*(Banderas+3)))
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -156,11 +157,11 @@ void GT(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void LE(uint32_t *PC,uint32_t Saltos,int *Banderas)
+void BLE(uint32_t *PC,uint32_t Salto,int *Banderas)
 {
     if ((*(Banderas+1)==0)||(*(Banderas+0)!=*(Banderas+3)))
     {
-        *PC=*PC+Saltos;
+        *PC=Salto;
     }
     else
     {
@@ -168,7 +169,7 @@ void LE(uint32_t *PC,uint32_t Saltos,int *Banderas)
     }
 }
 
-void AL(uint32_t *PC,uint32_t Saltos)
+void B(uint32_t *PC,uint32_t Salto)
 {
-    *PC=*PC+Saltos;
+    *PC=Salto;
 }
