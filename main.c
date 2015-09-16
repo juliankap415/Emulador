@@ -5,6 +5,7 @@
 #include "Registros.h"
 #include "Instrucciones.h"
 #include "Instrucciones_desplazamiento.h"
+#include "decoder.h"
 
 int main(void)
 {
@@ -29,7 +30,7 @@ int main(void)
             ACS_LLCORNER, ACS_LRCORNER);
 
     while(1)                                    //While donde se encuentran las secuencias
-    {
+    {   getch();
         init_pair(1,COLOR_WHITE,COLOR_CYAN);
 
         switch(registro[12])                                //Almacena la funcion para cada direccion
@@ -70,7 +71,7 @@ int main(void)
         }
 
         registro[12]+=1;
-        getch();                                            //Espera entrada del usuario
+                                                   //Espera entrada del usuario
     }
 
 
