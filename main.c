@@ -51,9 +51,11 @@ int main(void)
 
             MostrarRegistro(registro);                      //Imprimimos en pantalla los valores de los registros
             init_pair(1,COLOR_WHITE,COLOR_CYAN);
-            mvprintw(1,20,"%c",instruction);
+
+            mvprintw(21,43,"%s %c%d, %c%d %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+
             mvprintw(10,80,"BANDERAS");                     //Imprimimos en pantalla las banderas
-            mvprintw(12,80,"N=%d\n",Banderas[0  ]);
+            mvprintw(12,80,"N=%d\n",Banderas[0]);
             mvprintw(13,80,"Z=%d\n",Banderas[1]);
             mvprintw(14,80,"C=%d\n",Banderas[2]);
             mvprintw(15,80,"S=%d\n",Banderas[3]);
@@ -75,7 +77,6 @@ int main(void)
 	}
 	free(read.array);
 
-    //timeout(1000);
     endwin();	                                            //Finaliza el modo curses
     return 0;
 }
