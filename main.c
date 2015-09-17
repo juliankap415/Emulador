@@ -9,8 +9,21 @@
 
 int main(void)
 {
+    int i, num_instructions,Banderas[4]={0};
     uint32_t registro[13]={0};                  //Arreglo que contiene los registros
-    int Banderas[4]={0};                        //Arreglo que contiene las banderas
+    ins_t read;
+    char** instructions;
+    instruction_t instruction;
+
+    num_instructions = readFile("code.txt", &read);
+
+    if(num_instructions==-1)
+        return 0;
+
+    if(read.array==NULL)
+        return 0;
+
+    instructions = read.array;
 
     initscr();	                                //Inicia modo curses
     curs_set(0);	                            //Cursor Invisible
@@ -30,34 +43,17 @@ int main(void)
             ACS_LLCORNER, ACS_LRCORNER);
 
     while(1)                                    //While donde se encuentran las secuencias
-    {   getch();
+    {
+        instruction = getInstruction(instructions[registro[13]]); // Instrucción en la posición 0
+        decodeInstruction(instruction);
+        getch();
         init_pair(1,COLOR_WHITE,COLOR_CYAN);
 
-        switch(registro[12])                                //Almacena la funcion para cada direccion
-        {
-            case 1:                                         //Direccion 1
-                ROR(&registro[0],1,Banderas);
-                mvprintw(20,30,"Direccion 1:\tROR\t");
-                refresh();
-                break;
-
-            case 2:                                         //Direccion 2
-                ADDS(&registro[9],registro[1],3,Banderas);
-                mvprintw(20,30,"Direccion 2:\tADDS\t");
-                refresh();
-                break;
-
-            case 3:                                         //Direccion 3
-                break;
-
-        }
-
-        if (registro[12]!=0)
-        {
             MostrarRegistro(registro);                      //Imprimimos en pantalla los valores de los registros
             init_pair(1,COLOR_WHITE,COLOR_CYAN);
+            mvprintw(1,20,"%c",instruction);
             mvprintw(10,80,"BANDERAS");                     //Imprimimos en pantalla las banderas
-            mvprintw(12,80,"N=%d\n",Banderas[0]);
+            mvprintw(12,80,"N=%d\n",Banderas[0  ]);
             mvprintw(13,80,"Z=%d\n",Banderas[1]);
             mvprintw(14,80,"C=%d\n",Banderas[2]);
             mvprintw(15,80,"S=%d\n",Banderas[3]);
@@ -68,14 +64,18 @@ int main(void)
             ACS_LLCORNER, ACS_LRCORNER	);
 
             refresh();
-        }
 
-        registro[12]+=1;
+
+        registro[13]++;
                                                    //Espera entrada del usuario
     }
 
+    for(i=0; i<num_instructions; i++){
+		free(read.array[i]);
+	}
+	free(read.array);
 
+    //timeout(1000);
     endwin();	                                            //Finaliza el modo curses
-    getch();
     return 0;
 }

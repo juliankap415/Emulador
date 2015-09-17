@@ -1,5 +1,5 @@
 #include "Instrucciones_desplazamiento.h"
-#include "Instrucciones.h"
+#include "Banderas.h"
 
 typedef union
 {
@@ -16,13 +16,13 @@ typedef union
 void LSL(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la izquierda
 {
     *Rdn=*Rdn<<Rm; //bit de Rn se desplazan tantas veces indique Rm
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void LSR(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la derecha
 {
     *Rdn=*Rdn>>Rm; //bit de Rn se desplazan tantas veces indique Rm
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void ROR(uint32_t *Rdn,uint32_t Rm,int *flags)
@@ -31,7 +31,7 @@ void ROR(uint32_t *Rdn,uint32_t Rm,int *flags)
     aux1=*Rdn>>Rm;        //aux1 almacenara los primeros bits
     aux2=*Rdn<<(32-Rm);   //aux2 almacenara los ultimos bits
     *Rdn=aux1+aux2;
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void ASR(uint32_t *Rdn,uint32_t Rm,int *flags)
@@ -42,25 +42,25 @@ void ASR(uint32_t *Rdn,uint32_t Rm,int *flags)
     aux=aux<<31;
     *Rdn=*Rdn>>Rm;
     *Rdn=*Rdn+aux;
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void BIC(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     *Rdn=*Rdn&(~Rm);
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void MVN(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     *Rdn=~Rm;
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void RSB(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
     *Rdn=~Rm+1;
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void REV(uint32_t *Rdn,uint32_t Rm,int *flags)
@@ -69,7 +69,7 @@ void REV(uint32_t *Rdn,uint32_t Rm,int *flags)
 
     R.data = Rm;
     *Rdn= (uint32_t)(R.byte0 << 24) | (uint32_t)(R.byte3) | (uint32_t)(R.byte1 << 16) | (uint32_t)(R.byte2 << 8);
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void REV16(uint32_t *Rdn,uint32_t Rm,int *flags)
@@ -77,7 +77,7 @@ void REV16(uint32_t *Rdn,uint32_t Rm,int *flags)
     u32tobyte_t R;
     R.data = Rm;
     *Rdn = (uint32_t)(R.byte0 << 16) | (uint32_t)(R.byte3<<8) | (uint32_t)(R.byte1 << 24) | (uint32_t)(R.byte2);
-    BANDERAS(*Rdn,0,0,flags);
+    BANDERAS_DES(*Rdn,flags);
 }
 
 void REVSH(uint32_t Rd,uint32_t Rm,int *flags)
