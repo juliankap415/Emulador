@@ -7,7 +7,7 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas p
     //Bandera de negativo
     if (Rd>referencia)
     {
-        *(Banderas+0)=1;
+        *(Banderas+0)=1;        //se activa la bandera N
     }
 
     else
@@ -18,7 +18,7 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas p
     //Bandera de cero
     if (Rd==0)
     {
-        *(Banderas+1)=1;
+        *(Banderas+1)=1;        //se activa la bandera Z
     }
 
     else
@@ -29,7 +29,7 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas p
     //Bandera de acarreo
     if (Rd>(referencia))
     {
-        *(Banderas+2)=1;
+        *(Banderas+2)=1;        //se activa la bandera C
     }
 
     else
@@ -42,7 +42,7 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas p
 	{
 		if((Rn&referencia) != (Rd&referencia))
 		{
-			*(Banderas+3)=1; // bandera de sobreflujo igual a 1
+			*(Banderas+3)=1;                    //se activa la bandera V
 		}
 	}
 	else
@@ -58,7 +58,7 @@ void BANDERAS_DES(uint32_t Rd,int *Banderas)    //banderas para funciones de des
     //Bandera de negativo
     if (Rd>referencia)
     {
-        *(Banderas+0)=1;
+        *(Banderas+0)=1;            //se activa la bandera N
     }
 
     else
@@ -69,7 +69,7 @@ void BANDERAS_DES(uint32_t Rd,int *Banderas)    //banderas para funciones de des
     //Bandera de cero
     if (Rd==0)
     {
-        *(Banderas+1)=1;
+        *(Banderas+1)=1;            //se activa la bandera Z
     }
 
     else
@@ -78,7 +78,7 @@ void BANDERAS_DES(uint32_t Rd,int *Banderas)    //banderas para funciones de des
     }
 
     //Bandera de acarreo
-    *(Banderas+2)=0;
+    *(Banderas+2)=0;                //para estas funciones, no se activa la bandera C ni V
 
     //Bandera de sobre flujo
     *(Banderas+3)=0;

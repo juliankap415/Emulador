@@ -9,7 +9,7 @@
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BEQ(uint32_t *PC,int Salto,int *Banderas);
+void BEQ(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si los datos no son iguales
@@ -18,7 +18,7 @@ void BEQ(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BNE(uint32_t *PC,int Salto,int *Banderas);
+void BNE(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si un dato es mayor o igual a otro (sin signo)
@@ -27,7 +27,7 @@ void BNE(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BCS(uint32_t *PC,int Salto,int *Banderas);
+void BCS(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si un dato es menor a otro (sin signo)
@@ -36,7 +36,7 @@ void BCS(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BCC(uint32_t *PC,int Salto,int *Banderas);
+void BCC(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si el dato es negativo
@@ -45,7 +45,7 @@ void BCC(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BMI(uint32_t *PC,int Salto,int *Banderas);
+void BMI(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si el dato es positivo
@@ -54,7 +54,7 @@ void BMI(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BPL(uint32_t *PC,int Salto,int *Banderas);
+void BPL(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si hay sobreflujo
@@ -63,7 +63,7 @@ void BPL(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BVS(uint32_t *PC,int Salto,int *Banderas);
+void BVS(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si no hay sobreflujo
@@ -72,7 +72,7 @@ void BVS(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BVC(uint32_t *PC,int Salto,int *Banderas);
+void BVC(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si un dato es mayor que el otro (sin signo)
@@ -81,7 +81,7 @@ void BVC(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BHI(uint32_t *PC,int Salto,int *Banderas);
+void BHI(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si un dato es mayor o igual a otro (sin signo)
@@ -90,7 +90,7 @@ void BHI(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BLS(uint32_t *PC,int Salto,int *Banderas);
+void BLS(uint32_t *registro,int Salto,int *Banderas);
 /**
 * \brief Funcion de salto, si un dato es mayor o igual a otro (con signo)
 * \param PC Intrucciones a la que se le hara el salto correspondiente
@@ -98,7 +98,7 @@ void BLS(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BGE(uint32_t *PC,int Salto,int *Banderas);
+void BGE(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si un dato es menor a otro (con signo)
@@ -107,7 +107,7 @@ void BGE(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BLT(uint32_t *PC,int Salto,int *Banderas);
+void BLT(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si un dato es mayor a otro (con signo)
@@ -116,7 +116,7 @@ void BLT(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BGT(uint32_t *PC,int Salto,int *Banderas);
+void BGT(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, si un dato es menor o igual a otro (con signo)
@@ -125,7 +125,7 @@ void BGT(uint32_t *PC,int Salto,int *Banderas);
 * \param Banderas Quien se analizara para ver si se realiza el salto
 * \return No retorna
 */
-void BLE(uint32_t *PC,int Salto,int *Banderas);
+void BLE(uint32_t *registro,int Salto,int *Banderas);
 
 /**
 * \brief Funcion de salto, sin condicion
@@ -133,5 +133,11 @@ void BLE(uint32_t *PC,int Salto,int *Banderas);
 * \param Salto Direccion especifica
 * \return No retorna
 */
-void B(uint32_t *PC,int Salto);
+void B(uint32_t *registro,int Salto);
+
+void BL(uint32_t *registro,int salto);
+
+void BX(uint32_t *registro);
+
+void BLX(uint32_t *registro,uint32_t Registro);
 

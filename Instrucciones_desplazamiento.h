@@ -8,7 +8,7 @@
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void LSL(uint32_t *Rdn,uint32_t Rm,int *flags);
+void LSLS(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Desplazamiento logico a la derecha
@@ -17,7 +17,7 @@ void LSL(uint32_t *Rdn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void LSR(uint32_t *Rdn,uint32_t Rm,int *flags);
+void LSRS(uint32_t *Rdn,uint32_t Rm,int *flags);
 
 /**
 * \brief Rotacion a la derecha

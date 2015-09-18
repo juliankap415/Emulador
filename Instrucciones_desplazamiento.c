@@ -13,13 +13,13 @@ typedef union
     };
 }u32tobyte_t;
 
-void LSL(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la izquierda
+void LSLS(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la izquierda
 {
     *Rdn=*Rdn<<Rm; //bit de Rn se desplazan tantas veces indique Rm
     BANDERAS_DES(*Rdn,flags);
 }
 
-void LSR(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la derecha
+void LSRS(uint32_t *Rdn,uint32_t Rm,int *flags) //desplazamiento hacia la derecha
 {
     *Rdn=*Rdn>>Rm; //bit de Rn se desplazan tantas veces indique Rm
     BANDERAS_DES(*Rdn,flags);
