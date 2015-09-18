@@ -36,14 +36,16 @@ void SUBS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
     BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-void CMN(uint32_t Rn,uint32_t Rm,int *flags)
+void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    BANDERAS(Rn+Rm,0,0,flags);
+    Rd=Rn+Rm;
+    BANDERAS(Rd,Rn,Rm,flags);
 }
 
-void CMP(uint32_t Rn,uint32_t Rm,int *flags)
+void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    BANDERAS(Rn-Rm,0,0,flags);
+    Rd=Rn-Rm;
+    BANDERAS(Rd,Rn,Rm,flags);
 }
 
 void MUL(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
@@ -54,7 +56,7 @@ void MUL(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 
 void TST(uint32_t Rn,uint32_t Rm,int *flags)
 {
-    BANDERAS(Rn&Rm,0,0,flags);
+    BANDERAS(Rn&Rm,Rn,Rm,flags);
 }
 
 void NOP()

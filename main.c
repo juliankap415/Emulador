@@ -10,8 +10,9 @@
 int main(void)
 {
     int i, num_instructions,Banderas[4]={0};
-    uint32_t registro[13]={0};                  //Arreglo que contiene los registros
+    uint32_t registro[15]={0};                  //Arreglo que contiene los registros
     ins_t read;
+    char entrada;
     char** instructions;
     instruction_t instruction;
 
@@ -44,16 +45,34 @@ int main(void)
 
     while(1)                                    //While donde se encuentran las secuencias
     {
-        instruction = getInstruction(instructions[registro[13]]); // Instrucción en la posición 0
-        decodeInstruction(instruction);
-        getch();
+        instruction = getInstruction(instructions[registro[14]]); // Instrucción en la posición 0
+        decodeInstruction(instruction,Banderas,registro);
         init_pair(1,COLOR_WHITE,COLOR_CYAN);
+
+        entrada=getch();
+
+        if(entrada=='p')
+        {
+            timeout(1000);
+        }
+
+        if(entrada=='h')
+        {
+            timeout(-1);
+        }
+
+        if(entrada=='o')
+        {
+            return 0;
+        }
+
+
 
             MostrarRegistro(registro);                      //Imprimimos en pantalla los valores de los registros
             init_pair(1,COLOR_WHITE,COLOR_CYAN);
 
             mvprintw(21,43,"%s %c%d, %c%d %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
-
+            mvprintw(21,4,"PC:  %d",registro[14]);
             mvprintw(10,80,"BANDERAS");                     //Imprimimos en pantalla las banderas
             mvprintw(12,80,"N=%d\n",Banderas[0]);
             mvprintw(13,80,"Z=%d\n",Banderas[1]);
@@ -66,10 +85,8 @@ int main(void)
             ACS_LLCORNER, ACS_LRCORNER	);
 
             refresh();
-
-
-        registro[13]++;
-                                                   //Espera entrada del usuario
+        registro[14]++;
+                                                  //Espera entrada del usuario
     }
 
     for(i=0; i<num_instructions; i++){

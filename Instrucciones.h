@@ -67,7 +67,7 @@ void SUBS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void CMN(uint32_t Rn,uint32_t Rm,int *flags);
+void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion resta, pero solo modifica las banderas
@@ -76,7 +76,7 @@ void CMN(uint32_t Rn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void CMP(uint32_t Rn,uint32_t Rm,int *flags);
+void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion multiplica, guarda 32 bits menos significativos

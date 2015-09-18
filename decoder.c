@@ -1,19 +1,252 @@
 #include "decoder.h"
+#include "instrucciones.h"
+#include "instrucciones_desplazamiento.h"
+#include "instrucciones_saltos.h"
 
-void decodeInstruction(instruction_t instruction)
+void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registro)
 {
-	if( strcmp(instruction.mnemonic,"ADCS") == 0 ){
-		// instruction.op1_value --> Valor primer operando
-		// instruction.op1_type  --> Tipo primer operando (R->Registro #->Numero N->Ninguno)
-		// ... Igual para los otros operandos
+	if( strcmp(instruction.mnemonic,"ADDS") == 0||strcmp(instruction.mnemonic,"ADD") == 0 )
+	{
+	    if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        ADDS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
 	}
+
+    if( strcmp(instruction.mnemonic,"AND") == 0 )
+    {
+        AND(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"EOR") == 0 )
+    {
+        EOR(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"MOV") == 0 || strcmp(instruction.mnemonic,"MOVS") == 0)
+    {
+        if( instruction.op2_type == 'R' )
+        {
+            instruction.op2_value=registro[instruction.op2_value];
+        }
+
+        MOV(&registro[instruction.op1_value],instruction.op2_value);
+    }
+
+    if( strcmp(instruction.mnemonic,"ORR") == 0 )
+    {
+        ORR(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"SUBS") == 0||strcmp(instruction.mnemonic,"SUB") == 0 )
+    {
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        ADDS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"CMN") == 0 )
+    {
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+         CMN(registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"CMP") == 0 )
+    {
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+         CMP(registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"MUL") == 0 )
+    {
+         MUL(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"TST") == 0 )
+    {
+        TST(registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"NOP") == 0 )
+    {
+        NOP();
+    }
+
+    if( strcmp(instruction.mnemonic,"LSLS") == 0 ||strcmp(instruction.mnemonic,"LSL") == 0 )
+    {
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        LSLS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"LSRS") == 0 ||strcmp(instruction.mnemonic,"LSR") == 0)
+    {
+         if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        LSLS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"ROR") == 0 )
+    {
+         ROR(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"ASR") == 0 )
+    {
+        ASR(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BIC") == 0 )
+    {
+        BIC(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"MVN") == 0 )
+    {
+        MVN(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"RSB") == 0 )
+    {
+        RSB(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"REV") == 0 )
+    {
+        REV(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"REV16") == 0 )
+    {
+        REV16(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"REVSH") == 0 )
+    {
+        REVSH(&registro[instruction.op1_value],registro[instruction.op2_value],Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BEQ") == 0 )
+    {
+        BEQ(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BNE") == 0 )
+    {
+        BNE(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BCC") == 0 )
+    {
+        BCC(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BCS") == 0 )
+    {
+        BCS(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BMI") == 0 )
+    {
+        BMI(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BPL") == 0 )
+    {
+        BPL(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BVS") == 0 )
+    {
+        BVS(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BVC") == 0 )
+    {
+        BVC(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BHI") == 0 )
+    {
+        BHI(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BLS") == 0 )
+    {
+        BLS(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BGE") == 0 )
+    {
+        BGE(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BLT") == 0 )
+    {
+        BLT(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BGT") == 0 )
+    {
+        BGT(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"BLE") == 0 )
+    {
+        BLE(registro,(int)instruction.op1_value,Banderas);
+    }
+
+    if( strcmp(instruction.mnemonic,"B") == 0 )
+    {
+        B(registro,(int)instruction.op1_value);
+    }
+
+    if( strcmp(instruction.mnemonic,"BL") == 0 )
+    {
+        BL(registro,(int)instruction.op1_value);
+    }
+
+    if( strcmp(instruction.mnemonic,"BX") == 0 )
+    {
+        BX(registro);
+    }
+
+    if( strcmp(instruction.mnemonic,"BLX") == 0 )
+    {
+
+    }
 }
 
 
 instruction_t getInstruction(char* instStr)
 {
 	instruction_t instruction;
-	char* split = (char*)malloc(strlen(instStr));
+	char* split = (char*)malloc(strlen(instStr)+1);
 	int num=0;
 
 	strcpy(split, instStr);
@@ -66,12 +299,12 @@ int readFile(char* filename, ins_t* instructions)
 	if( fp==NULL )
 		return -1;	/* Error al abrir el archivo */
 
-	lines = countLines(fp)-1;	/* Cantidad de líneas*/
+	lines = countLines(fp);	/* Cantidad de líneas*/
 
 	/* Asignación dinámica de memoria para cada instrucción */
 	instructions->array = (char**)malloc(lines*sizeof(char*));
 	while ( fgets(buffer, 50, fp) != NULL && line<lines ){
-        instructions->array[line] = (char*)malloc(strlen(buffer)*sizeof(char));
+        instructions->array[line] = (char*)malloc((strlen(buffer)+1)*sizeof(char));
 		strcpy(instructions->array[line], buffer);
 		line++;
  	}
@@ -85,14 +318,11 @@ int readFile(char* filename, ins_t* instructions)
 int countLines(FILE* fp)
 {
 	int lines=0;
-	int ch;
+	char buffer[50];
 
-	while(!feof(fp))
-	{
-	  ch = fgetc(fp);
-	  if(ch == '\n')
+	while( fgets(buffer, 50, fp) != NULL )
 		lines++;
-	}
+
 	rewind(fp);
 
 	return lines;
