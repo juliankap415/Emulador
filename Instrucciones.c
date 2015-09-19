@@ -1,30 +1,34 @@
 #include "Instrucciones.h"
 #include "Banderas.h"
 
+/**\file Instrucciones.c
+*\brief libreria encargada de realizar las funciones aritmeticas
+*/
+
 void ADDS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     *Rd=Rn+Rm;
     BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
+void ANDS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     *Rd=Rn&Rm;
     BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
+void EORS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     *Rd=Rn^Rm;
     BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-void MOV(uint32_t *Rd,uint32_t Rn)
+void MOVS(uint32_t *Rd,uint32_t Rn)
 {
     *Rd=Rn;
 }
 
-void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
+void ORRS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     *Rd=Rn|Rm;
     BANDERAS(*Rd,Rn,Rm,flags);
@@ -32,23 +36,23 @@ void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 
 void SUBS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    *Rd=Rn-Rm;
+    *Rd=Rn+~Rm;
     BANDERAS(*Rd,Rn,Rm,flags);
 }
 
-void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags)
+void CMNS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     Rd=Rn+Rm;
     BANDERAS(Rd,Rn,Rm,flags);
 }
 
-void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags)
+void CMPS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     Rd=Rn-Rm;
     BANDERAS(Rd,Rn,Rm,flags);
 }
 
-void MUL(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
+void MULS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
     *Rd=Rn*Rm;
     BANDERAS(*Rd,Rn,Rm,flags);
@@ -62,6 +66,20 @@ void TST(uint32_t Rn,uint32_t Rm,int *flags)
 void NOP()
 {
 
+}
+
+void ADCS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
+{
+    *Rd=Rn+Rm;
+    BANDERAS(*Rd,Rn,Rm,flags);
+    *Rd=Rn+Rm+*(flags+2);
+}
+
+void SBCS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
+{
+    *Rd=Rn+~Rm;
+    BANDERAS(*Rd,Rn,Rm,flags);
+    *Rd=Rn+~Rm+*(flags+2);
 }
 
 

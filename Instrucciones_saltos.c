@@ -1,6 +1,10 @@
 
 #include "Instrucciones_saltos.h"
 
+/**\file Instrucciones_saltos.c
+*\brief libreria encargada de realizar las funciones saltos
+*/
+
 void BEQ(uint32_t *registro,int Salto,int *Banderas)
 {
     if (*(Banderas+1)==1)                           //Condicion para poder realizar el salto
@@ -176,7 +180,7 @@ void B(uint32_t *registro,int Salto)
 
 void BL(uint32_t *registro,int salto)
 {
-    *(registro+13)=*(registro+14)+1;
+    *(registro+13)=*(registro+14)+2;
     *(registro+14)+=salto;
 }
 

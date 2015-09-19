@@ -20,7 +20,7 @@ void ADDS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
+void ANDS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion logica X-OR, bit a bit
@@ -30,7 +30,7 @@ void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
+void EORS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion realiza una copia de un registro en otro
@@ -38,7 +38,7 @@ void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \param Rn Dato al que se le realizara una copia
 * \return No retorna
 */
-void MOV(uint32_t *Rd,uint32_t Rn);
+void MOVS(uint32_t *Rd,uint32_t Rn);
 
 /**
 * \brief Funcion logica OR, bit a bit
@@ -48,7 +48,7 @@ void MOV(uint32_t *Rd,uint32_t Rn);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
+void ORRS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion resta
@@ -67,7 +67,7 @@ void SUBS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
+void CMNS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion resta, pero solo modifica las banderas
@@ -76,7 +76,7 @@ void CMN(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
+void CMPS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion multiplica, guarda 32 bits menos significativos
@@ -86,7 +86,11 @@ void CMP(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \param flags Arreglo donde se almacenaran las banderas
 * \return No retorna
 */
-void MUL(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
+void MULS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
+
+void ADCS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
+
+void SBCS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**
 * \brief Funcion logica AND, bit a bit pero solo modifica las banderas

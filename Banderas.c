@@ -1,5 +1,9 @@
 #include "Banderas.h"
 
+/**\file banderas.c
+*\brief libreria encargada de activar o desactivar las banderas
+*/
+
 void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas para funciones aritmeticas
 {
     uint32_t referencia=2147483647;

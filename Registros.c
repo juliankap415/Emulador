@@ -16,7 +16,7 @@ void MostrarRegistro( uint32_t *registro)
             for (j=0;j<=5;j++)
             {
                 attron(COLOR_PAIR(2));
-                mvprintw(12+j,5,"Registro #%.2d:",j+1);
+                mvprintw(12+j,5,"Registro #%.2d:",j);
                 attroff(COLOR_PAIR(2));
 
                 attron(COLOR_PAIR(3));
@@ -27,7 +27,7 @@ void MostrarRegistro( uint32_t *registro)
             for (j=6;j<=11;j++)
             {
                 attron(COLOR_PAIR(2));
-                mvprintw(12+j-6,35,"Registro #%.2d:",j+1);
+                mvprintw(12+j-6,35,"Registro #%.2d:",j);
                 attroff(COLOR_PAIR(2));
 
                 attron(COLOR_PAIR(3));

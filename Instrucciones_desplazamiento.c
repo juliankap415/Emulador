@@ -1,6 +1,10 @@
 #include "Instrucciones_desplazamiento.h"
 #include "Banderas.h"
 
+/**\file Instrucciones_desplazamiento.c
+*\brief libreria encargada de realizar las funciones de desplazamiento
+*/
+
 typedef union
 {
     uint32_t data;

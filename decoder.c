@@ -3,6 +3,10 @@
 #include "instrucciones_desplazamiento.h"
 #include "instrucciones_saltos.h"
 
+/**\file decoder.c
+*\brief libreria encargada de obtener las instrucciones del documento de texto, ademas de ejecutar las funciones indicadas en las intrucciones
+*/
+
 void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registro)
 {
 	if( strcmp(instruction.mnemonic,"ADDS") == 0||strcmp(instruction.mnemonic,"ADD") == 0 )
@@ -16,14 +20,25 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
         ADDS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
 	}
 
-    if( strcmp(instruction.mnemonic,"AND") == 0 )
+    if( strcmp(instruction.mnemonic,"ANDS") == 0 ||strcmp(instruction.mnemonic,"AND") == 0 )
     {
-        AND(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        ANDS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
     }
 
-    if( strcmp(instruction.mnemonic,"EOR") == 0 )
+    if( strcmp(instruction.mnemonic,"EOR") == 0 ||strcmp(instruction.mnemonic,"EORS") == 0 )
     {
-        EOR(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+        EORS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
     }
 
     if( strcmp(instruction.mnemonic,"MOV") == 0 || strcmp(instruction.mnemonic,"MOVS") == 0)
@@ -33,12 +48,18 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
             instruction.op2_value=registro[instruction.op2_value];
         }
 
-        MOV(&registro[instruction.op1_value],instruction.op2_value);
+        MOVS(&registro[instruction.op1_value],instruction.op2_value);
     }
 
-    if( strcmp(instruction.mnemonic,"ORR") == 0 )
+    if( strcmp(instruction.mnemonic,"ORR") == 0 ||strcmp(instruction.mnemonic,"ORR") == 0)
     {
-        ORR(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        ORRS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
     }
 
     if( strcmp(instruction.mnemonic,"SUBS") == 0||strcmp(instruction.mnemonic,"SUB") == 0 )
@@ -49,10 +70,10 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
             instruction.op2_value=instruction.op1_value;
         }
 
-        ADDS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+        SUBS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
     }
 
-    if( strcmp(instruction.mnemonic,"CMN") == 0 )
+    if( strcmp(instruction.mnemonic,"CMN") == 0|| strcmp(instruction.mnemonic,"CMNS") == 0 )
     {
         if(instruction.op3_value==0)
         {
@@ -60,10 +81,10 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
             instruction.op2_value=instruction.op1_value;
         }
 
-         CMN(registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+         CMNS(registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
     }
 
-    if( strcmp(instruction.mnemonic,"CMP") == 0 )
+    if( strcmp(instruction.mnemonic,"CMP") == 0|| strcmp(instruction.mnemonic,"CMPS") == 0 )
     {
         if(instruction.op3_value==0)
         {
@@ -71,12 +92,18 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
             instruction.op2_value=instruction.op1_value;
         }
 
-         CMP(registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+         CMPS(registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
     }
 
-    if( strcmp(instruction.mnemonic,"MUL") == 0 )
+    if( strcmp(instruction.mnemonic,"MUL") == 0|| strcmp(instruction.mnemonic,"MULS") == 0 )
     {
-         MUL(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+        if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+         MULS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
     }
 
     if( strcmp(instruction.mnemonic,"TST") == 0 )
@@ -88,6 +115,28 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
     {
         NOP();
     }
+
+    if( strcmp(instruction.mnemonic,"ADC") == 0||strcmp(instruction.mnemonic,"ADCS") == 0 )
+	{
+	    if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        ADCS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+	}
+
+	if( strcmp(instruction.mnemonic,"SBCS") == 0||strcmp(instruction.mnemonic,"SBC") == 0 )
+	{
+	    if(instruction.op3_value==0)
+        {
+            instruction.op3_value=instruction.op2_value;
+            instruction.op2_value=instruction.op1_value;
+        }
+
+        SBCS(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],Banderas);
+	}
 
     if( strcmp(instruction.mnemonic,"LSLS") == 0 ||strcmp(instruction.mnemonic,"LSL") == 0 )
     {
@@ -240,80 +289,73 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
     {
 
     }
+
 }
 
 
 instruction_t getInstruction(char* instStr)
 {
 	instruction_t instruction;
-	char* split = (char*)malloc(strlen(instStr)+1);
+	char* split = (char*)malloc( strlen(instStr)+1);
 	int num=0;
 
-	strcpy(split, instStr);
-	/* Obtiene el mnemonico de la instrucción */
-	split = strtok(split, " ,");
+	strcpy( split, instStr);
+	// Obtiene el mnemonico de la instrucción
+	split = strtok( split, " ,");
 	strcpy(instruction.mnemonic, split);
 
-	/* Separa los operandos */
-	while (split != NULL)
+	// Separa los operandos
+	while ( split != NULL)
 	{
 		switch(num){
 			case 1:
 				instruction.op1_type  = split[0];
-				instruction.op1_value = (uint32_t)strtol(split+1, NULL, 0);
+				instruction.op1_value = (uint32_t)strtoll( split+1, NULL, 0);
 				break;
 
 			case 2:
 				instruction.op2_type  = split[0];
-				instruction.op2_value = (uint32_t)strtol(split+1, NULL, 0);
+				instruction.op2_value = (uint32_t)strtoll( split+1, NULL, 0);
 				break;
 
 			case 3:
 				instruction.op3_type  = split[0];
-				instruction.op3_value = (uint32_t)strtol(split+1, NULL, 0);
+				instruction.op3_value = (uint32_t)strtoll( split+1, NULL, 0);
 				break;
 		}
-
 		split = strtok(NULL, " ,.");
 		num++;
 	}
-
 	if(num==3){
 		instruction.op3_type  = 'N';
 		instruction.op3_value = 0;
 	}
-
-	free(split);
-
+	free( split);
 	return instruction;
 }
 
 int readFile(char* filename, ins_t* instructions)
 {
-	FILE* fp;	/* Puntero a un archivo  */
-	int lines;	/* Cantidad de líneas del archivo */
-	int line=0;	/* Línea leida */
-	char buffer[50]; /* Almacena la cadena leida */
+	FILE* fp;	// Puntero a un archivo
+	int lines;	// Cantidad de líneas del archivo
+	int line=0;	// Línea leida
+	char buffer[50]; // Almacena la cadena leida
 
-	fp = fopen(filename, "r");	/* Abrir el archivo como solo lectura */
+	fp = fopen(filename, "r");	// Abrir el archivo como solo lectura
 	if( fp==NULL )
-		return -1;	/* Error al abrir el archivo */
+		return -1;	// Error al abrir el archivo
 
-	lines = countLines(fp);	/* Cantidad de líneas*/
-
-	/* Asignación dinámica de memoria para cada instrucción */
+	lines = countLines(fp);	// Cantidad de líneas
+	// Asignación dinámica de memoria para cada instrucción
 	instructions->array = (char**)malloc(lines*sizeof(char*));
 	while ( fgets(buffer, 50, fp) != NULL && line<lines ){
-        instructions->array[line] = (char*)malloc((strlen(buffer)+1)*sizeof(char));
+        instructions->array[line] = (char*)malloc(( strlen(buffer)+1)*sizeof(char));
 		strcpy(instructions->array[line], buffer);
 		line++;
  	}
-
-	fclose(fp);	/* Cierra el archivo */
-
+	fclose(fp);	// Cierra el archivo
 	return lines;
 }
-
 
 int countLines(FILE* fp)
 {
