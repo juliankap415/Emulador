@@ -6,26 +6,34 @@
 #include <string.h>
 #include <stdint.h>
 
+/** \file decoder.h
+ *  \brief Archivo que contiene las estructuras ins-t y instruction_t, ademas se encuentran definidas las funciones para realizar las intrucciones del documento de texto
+*/
+/** \struct ins_t;
+ *  \brief  Estructura que almacena las instrucciones del archivo de texto
+ */
 
 typedef struct
 {
-	char** array;
+	char** array;   /*!< Arreglo que se utiliza con el fin de guardas las instrucciones del documento de texto en una memoria dinamica*/
 }ins_t;
 
+/** \struct instruction_t;
+ *  \brief  Estructura que almacena cada instrucciones en sus diferentes partes
+ */
 
 typedef struct
 {
-	char mnemonic[10];
-	char op1_type;
-	char op2_type;
-	char op3_type;
-	uint32_t op1_value;
-	uint32_t op2_value;
-	uint32_t op3_value;
+	char mnemonic[10];  /*!< Guarda el mnemonico de la instruccion*/
+	char op1_type;      /*!< Guarda el caracter del primer parametro de la instruccion*/
+	char op2_type;      /*!< Guarda el caracter del segundo parametro de la intruccion*/
+	char op3_type;      /*!< Guarda el caracter del tecer parametro de la intruccion*/
+	uint32_t op1_value; /*!< Guarda el numero del primer parametro de la instruccion*/
+    uint32_t op2_value; /*!< Guarda el numero del segundo parametro de la instruccion*/
+	uint32_t op3_value; /*!< Guarda el numero del tercer parametro de la instruccion*/
 }instruction_t;
 
-
-/** \fn void decodeInstruction(instruction_t instruction)
+/** \fn void decodeInstruction(instruction_t instruction,uint32_t *registro,flags_t *bandera);
     \brief Decodifica la instrucción y la ejecuta.
     \param instruction instrucción a decodificar y ejecutar.
 */

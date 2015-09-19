@@ -1,7 +1,7 @@
 #include "Banderas.h"
 
 /**\file banderas.c
-*\brief libreria encargada de activar o desactivar las banderas
+*\brief Contiene las funciones para la correcta activacion de las banderas N,Z,C,V
 */
 
 void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas para funciones aritmeticas

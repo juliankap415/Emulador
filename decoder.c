@@ -3,8 +3,8 @@
 #include "instrucciones_desplazamiento.h"
 #include "instrucciones_saltos.h"
 
-/**\file decoder.c
-*\brief libreria encargada de obtener las instrucciones del documento de texto, ademas de ejecutar las funciones indicadas en las intrucciones
+/** \file decoder.c
+ *  \brief Contiene las funciones para poder obtener las instrucciones del documento de texto, y asi poder ejecutarlas
 */
 
 void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registro)
