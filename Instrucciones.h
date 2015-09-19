@@ -88,8 +88,24 @@ void CMPS(uint32_t Rn,uint32_t Rm,int *flags);
 */
 void MULS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
+/**
+* \brief Funcion suma con acarreo
+* \param Rd Dato donde se almacenara el resultado
+* \param Rn Primer dato a realizar la operacion
+* \param Rm Segundo dato a realizar la operacion
+* \param flags Arreglo donde se almacenaran las banderas
+* \return No retorna
+*/
 void ADCS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
+/**
+* \brief Funcion resta con acarreo
+* \param Rd Dato donde se almacenara el resultado
+* \param Rn Primer dato a realizar la operacion
+* \param Rm Segundo dato a realizar la operacion
+* \param flags Arreglo donde se almacenaran las banderas
+* \return No retorna
+*/
 void SBCS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 
 /**

@@ -86,4 +86,21 @@ void REV16(uint32_t *Rdn,uint32_t Rm,int *flags)
 
 void REVSH(uint32_t *Rdn,uint32_t Rm,int *flags)
 {
+    uint32_t aux1,aux2=~0,aux3;                      //aux1 salvar segundo byte,aux2 32 bit de 1,aux3 mirar el signo
+
+	aux1=*Rdn<<16;
+	aux1=aux1>>24;
+
+	aux3=*Rdn<<24;
+	aux3=aux3>>31;
+
+	if(aux3==1)
+	{
+		aux2=aux2<<8;
+		*Rdn=aux1+aux2;
+	}
+	else
+    {
+    *Rdn=aux1;
+    }
 }
