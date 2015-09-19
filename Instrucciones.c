@@ -36,7 +36,7 @@ void ORRS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 
 void SUBS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags)
 {
-    *Rd=Rn+~Rm;
+    *Rd=Rn-Rm;
     BANDERAS(*Rd,Rn,Rm,flags);
 }
 

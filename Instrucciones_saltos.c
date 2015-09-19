@@ -184,14 +184,14 @@ void BL(uint32_t *registro,int salto)
     *(registro+14)+=salto;
 }
 
-void BX(uint32_t *registro)          //cambiamos LR por el registro 14
+void BX(uint32_t *registro,uint32_t Salto)
 {
-    *(registro+14)=*(registro+13);
+    *(registro+14)=Salto;
 }
 
-void BLX(uint32_t *registro,uint32_t Registro)          //cambiamos LR por el registro 14
+void BLX(uint32_t *registro,uint32_t Registro)
 {
-    *(registro+13)=*(registro+14)+1;
+    *(registro+13)=*(registro+14)+2;
     *(registro+14)+=Registro;
 }
 

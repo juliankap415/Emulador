@@ -137,7 +137,7 @@ void B(uint32_t *registro,int Salto);
 
 void BL(uint32_t *registro,int salto);
 
-void BX(uint32_t *registro);
+void BX(uint32_t *registro,uint32_t Salto);
 
 void BLX(uint32_t *registro,uint32_t Registro);
 
