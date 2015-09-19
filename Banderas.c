@@ -6,10 +6,10 @@
 
 void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas para funciones aritmeticas
 {
-    uint32_t referencia=2147483647;
+    uint32_t referencia=2147483647;                                 //valor (2^32/2)-1
 
     //Bandera de negativo
-    if (Rd>referencia)
+    if (Rd>>31==1)           //Si Rd supera a la referencia entonces Rd es negativo
     {
         *(Banderas+0)=1;        //se activa la bandera N
     }
