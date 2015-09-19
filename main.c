@@ -45,7 +45,10 @@ int main(void)
     attron(COLOR_PAIR(1));
     bkgd(COLOR_PAIR(1));                        //Fondo de pantalla color cyan
 
-    mvprintw(5,47,"EMULADOR");                  //Imprime el titulo de la pantalla
+    mvprintw(1,40,"EMULADOR ARM Cortex M0");                  //Imprime el titulo de la pantalla
+    mvprintw(4,4,"Presiones p, para ejecutar con tiempo de 1 seg");
+    mvprintw(5,4,"Presiones h, para ejecutar paso a paso");
+    mvprintw(6,4,"Presiones o, para salir");
     refresh();                                         //Imprime en la pantalla
 
     while(1)                                    //While donde se encuentran las secuencias

@@ -1,6 +1,5 @@
 MOVS R0,#20
 MOVS R1,#6
-SUBS R1,#8
 CMP R0,R1
 BL #3
 

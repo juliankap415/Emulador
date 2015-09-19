@@ -7,7 +7,9 @@
 void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas para funciones aritmeticas
 {
     uint32_t referencia=2147483647;                                 //valor (2^32/2)-1
-
+    uint32_t aux1,aux2,aux3;                                        //aux1 guarda el bit mas significativo de Rn
+                                                                    //aux2 guarda el bit mas significativo de Rm
+                                                                    //aux3 guarda el bit mas significativo de Rd
     //Bandera de negativo
     if (Rd>>31==1)           //Si Rd supera a la referencia entonces Rd es negativo
     {
@@ -42,13 +44,15 @@ void BANDERAS(uint32_t Rd,uint32_t Rn,uint32_t Rm,int *Banderas)    //banderas p
     }
 
     //Bandera de sobre flujo
-    if((Rn&(referencia)) == (Rm&referencia))
-	{
-		if((Rn&referencia) != (Rd&referencia))
+    aux1=Rn>>31;
+    aux2=Rm>>31;
+    aux3=Rd>>31;
+
+    if((aux1==aux2)&&(aux3!=aux1))
 		{
 			*(Banderas+3)=1;                    //se activa la bandera V
 		}
-	}
+
 	else
 	{
 		*(Banderas+3)=0;
