@@ -82,14 +82,6 @@ int main(void)
         {
             break;
         }
-
-        if  (strcmp(instruction.mnemonic,"BL") == 0)
-        {
-        instruction = getInstruction(instructions[registro[14]]); // Instrucción en la posición 0
-        decodeInstruction(instruction,Banderas,registro);
-        }
-
-        registro[14]++;
     }
 
     for(i=0; i<num_instructions; i++)
