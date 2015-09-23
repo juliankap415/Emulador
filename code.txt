@@ -3,7 +3,7 @@ MOVS R1,#6
 CMP R0,R1
 BL #3
 
-B #0  
+B #0
 MOV R2,R0
 MOVS R3,#0x1
 LSLS R3,R3,#31

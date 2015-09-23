@@ -73,7 +73,7 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
             instruction.op2_value=registro[instruction.op2_value];
         }
 
-        MOVS(&registro[instruction.op1_value],instruction.op2_value);
+        MOVS(&registro[instruction.op1_value],instruction.op2_value,Banderas);
         registro[14]++;
     }
 
@@ -386,7 +386,7 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
         BLE(registro,(int)instruction.op1_value,Banderas);
     }
 
-    if( strcmp(instruction.mnemonic,"B") == 0 )
+    if( strcmp(instruction.mnemonic,"B") == 0 || strcmp(instruction.mnemonic,"BAL") == 0)
     {
         B(registro,(int)instruction.op1_value);
     }

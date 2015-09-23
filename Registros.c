@@ -5,7 +5,6 @@
 *\brief Contiene la funcion para poder imprimir en pantalla los registros
 */
 
-
 void MostrarRegistro( uint32_t *registro)
 {
     int j;

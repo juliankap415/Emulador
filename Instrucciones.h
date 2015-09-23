@@ -40,9 +40,10 @@ void EORS(uint32_t *Rd,uint32_t Rn,uint32_t Rm,int *flags);
 * \brief Funcion realiza una copia de un registro en otro
 * \param *Rd Dato donde se realizara la copia
 * \param Rn Dato al que se le realizara una copia
+* \param *flags Arreglo donde se almacenaran las banderas
 * \return No hay retorno de la funcion
 */
-void MOVS(uint32_t *Rd,uint32_t Rn);
+void MOVS(uint32_t *Rd,uint32_t Rn,int *flags);
 
 /**
 * \brief Funcion logica OR, bit a bit
