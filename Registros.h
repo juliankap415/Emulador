@@ -13,4 +13,6 @@
 */
 void MostrarRegistro(uint32_t *registro);
 
+void MostrarSRAM(uint8_t *SRAM);
+
 

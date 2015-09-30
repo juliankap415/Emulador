@@ -13,4 +13,6 @@
 * \param *SRAM Memoria
 * \return No hay retorno de la funcion
 */
-void PUSH(uint32_t *registro,int *R,uint8_t *SRAM);
+void PUSH(uint32_t *registro,uint8_t *R,uint8_t *SRAM);
+
+void POP(uint32_t *registro,uint8_t *R,uint8_t *SRAM);

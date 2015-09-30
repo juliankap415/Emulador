@@ -31,13 +31,15 @@ typedef struct
 	uint32_t op1_value; /*!< Guarda el numero del primer parametro de la instruccion*/
     uint32_t op2_value; /*!< Guarda el numero del segundo parametro de la instruccion*/
 	uint32_t op3_value; /*!< Guarda el numero del tercer parametro de la instruccion*/
+	uint8_t  registers_list[16];
 }instruction_t;
+
 
 /** \fn void decodeInstruction(instruction_t instruction,uint32_t *registro,flags_t *bandera);
     \brief Decodifica la instrucción y la ejecuta.
     \param instruction instrucción a decodificar y ejecutar.
 */
-void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registro);
+void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registro,uint8_t *SRAM);
 
 /** \fn instruction_t getInstruction(char* instStr)
     \brief Obtiene la instrucción separada por partes.

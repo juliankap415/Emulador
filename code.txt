@@ -1,7 +1,11 @@
+MOVS R0,#3000
+MOVS R1,#7000
+PUSH {R0,R1}
+POP {R2,R3}
 MOVS R0,#20
 MOVS R1,#6
 CMP R0,R1
-BL #3
+BL #3                     
 
 B #0
 MOV R2,R0
