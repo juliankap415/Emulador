@@ -3,6 +3,7 @@
 #include "instrucciones_desplazamiento.h"
 #include "instrucciones_saltos.h"
 #include "SRAM.h"
+#include "Instrucciones_load_store.h"
 
 /** \file decoder.c
  *  \brief Contiene las funciones para poder obtener las instrucciones del documento de texto, y asi poder ejecutarlas
@@ -427,6 +428,129 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
         (*(registro+15))++;
     }
 
+    if( strcmp(instruction.mnemonic,"LDR") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDR(&registro[instruction.op1_value], registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+
+
+        if((instruction.op2_type=='P') && (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDR(&registro[instruction.op1_value],*(registro + 15),(uint32_t) instruction.op3_value,SRAM);
+        }
+
+        if((instruction.op2_type=='P') && (instruction.op3_type=='R'))
+            LDR(&registro[instruction.op1_value],*(registro + 15),registro[instruction.op3_value],SRAM);
+
+
+        if((instruction.op2_type=='S' )&& (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDR(&registro[instruction.op1_value],*(registro + 13),(uint32_t)instruction.op3_value,SRAM);
+        }
+
+        if((instruction.op2_type=='S') && (instruction.op3_type=='R'))
+            LDR(&registro[instruction.op1_value],*(registro + 13),registro[instruction.op3_value],SRAM);
+
+        if((instruction.op2_type=='R') && (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDR(&registro[instruction.op1_value],instruction.op2_value,(uint32_t)instruction.op3_value,SRAM);
+        }
+        registro[15]++;
+	}
+
+	if( strcmp(instruction.mnemonic,"LDRB") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDRB(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+
+
+        if((instruction.op2_type=='R') && (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDRB(&registro[instruction.op1_value],registro[instruction.op2_value],(uint32_t)instruction.op3_value,SRAM);
+        }
+        registro[15]++;
+	}
+
+	if( strcmp(instruction.mnemonic,"LDRH") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDRH(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+
+        if((instruction.op2_type=='R') && (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDRH(&registro[instruction.op1_value],registro[instruction.op2_value],(uint32_t)instruction.op3_value,SRAM);
+        }
+        registro[15]++;
+	}
+
+	if( strcmp(instruction.mnemonic,"LDRSB") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDRSB(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+        registro[15]++;
+	}
+
+	if( strcmp(instruction.mnemonic,"LDRSH") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDRSB(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+        registro[15]++;
+	}
+
+	if( strcmp(instruction.mnemonic,"STR") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDR(&registro[instruction.op1_value], registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+
+        if((instruction.op2_type=='S' )&& (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDR(&registro[instruction.op1_value],*(registro + 13),(uint32_t)instruction.op3_value,SRAM);
+        }
+
+        if((instruction.op2_type=='S') && (instruction.op3_type=='R'))
+            LDR(&registro[instruction.op1_value],*(registro + 13),registro[instruction.op3_value],SRAM);
+
+        if((instruction.op2_type=='R') && (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDR(&registro[instruction.op1_value],instruction.op2_value,(uint32_t)instruction.op3_value,SRAM);
+        }
+        registro[15]++;
+	}
+
+	if( strcmp(instruction.mnemonic,"STRB") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDRB(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+
+
+        if((instruction.op2_type=='R') && (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDRB(&registro[instruction.op1_value],registro[instruction.op2_value],(uint32_t)instruction.op3_value,SRAM);
+        }
+        registro[15]++;
+	}
+
+	if( strcmp(instruction.mnemonic,"STRH") == 0)
+	{
+	    if(instruction.op2_type=='R' && instruction.op3_type=='R')
+            LDRB(&registro[instruction.op1_value],registro[instruction.op2_value],registro[instruction.op3_value],SRAM);
+
+
+        if((instruction.op2_type=='R') && (instruction.op3_type=='#'))
+        {
+        instruction.op3_value = instruction.op3_value << 2;
+        LDRB(&registro[instruction.op1_value],registro[instruction.op2_value],(uint32_t)instruction.op3_value,SRAM);
+        }
+        registro[15]++;
+	}
 }
 
 instruction_t getInstruction(char* instStr)
