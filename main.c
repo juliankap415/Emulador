@@ -31,7 +31,7 @@ int main(void)
                                                 //registro[14]=LR
     uint8_t SRAM[128],data=0;
     uint16_t *mnemonico_hex=0;
-//    int *Indicador=0;
+   // int *Indicador=0;
                                   //variable para guardar la entrada por parte del teclado
     for(i=0;i<=15;i++)
     {
@@ -67,37 +67,41 @@ int main(void)
     init_pair(1,COLOR_WHITE,COLOR_CYAN); 	    //Texto blanco, fondo cyan
     attron(COLOR_PAIR(1));
     bkgd(COLOR_PAIR(1));                        //Fondo de pantalla color cyan
-    mvprintw(1,40,"EMULADOR ARM Cortex M0");                          //Imprime el titulo de la pantalla
-    mvprintw(21,4,"Presiones p, para ejecutar con tiempo de 1 seg");   //Se imprimen las opciones para correr el codigo en pantalla
-    mvprintw(22,4,"Presiones s, para detener ejecucion con tiempo");
-    mvprintw(23,4,"Presiones espacio, para ejecutar paso a paso");
-    mvprintw(24,4,"Presiones o, para salir");
-    mvprintw(25,4,"Presiones m, para mostrar SRAM");
-    showPorts();
-    MostrarRegistro(registro);                                   //Imprimimos en pantalla los valores de los registros
-    init_pair(1,COLOR_WHITE,COLOR_CYAN);
-    mvprintw(38,8,"PC: %d\t\tLR: %d",registro[15]*2,registro[14]*2);  //Se muestra en pantalla la variacion de PC y LR
-    mvprintw(27,83,"BANDERAS");                                     //Se muestra en pantalla la variacion de Banderas
-    mvprintw(29,83,"N=%d\n",Banderas[0]);
-    mvprintw(30,83,"Z=%d\n",Banderas[1]);
-    mvprintw(31,83,"C=%d\n",Banderas[2]);
-    mvprintw(32,83,"V=%d\n",Banderas[3]);
-    refresh();
     initIO();                                    //Iniciar puertos E/S
 
     while(1)                                                         //While donde se encuentran las secuencias
     {
 
 
-     //   NVIC(&registro[0],Banderas,SRAM,&irq[0],Indicador);
+        //NVIC(&registro[0],Banderas,SRAM,&irq[0],Indicador);
+        erase();
+        init_pair(1,COLOR_WHITE,COLOR_CYAN);
+        mvprintw(1,40,"EMULADOR ARM Cortex M0");                          //Imprime el titulo de la pantalla
+        mvprintw(18,4,"Presiones p, para ejecutar con tiempo de 1 seg");   //Se imprimen las opciones para correr el codigo en pantalla
+        mvprintw(19,4,"Presiones s, para detener ejecucion con tiempo");
+        mvprintw(20,4,"Presiones espacio, para ejecutar paso a paso");
+        mvprintw(21,4,"Presiones o, para salir");
+        mvprintw(22,4,"Presiones m, para mostrar SRAM");
+        MostrarSRAM(SRAM);
+        showPorts();
+        MostrarRegistro(registro);                                   //Imprimimos en pantalla los valores de los registros
 
+
+        mvprintw(10,70,"PC: %d\tLR: %d",registro[15]*2,registro[14]*2);  //Se muestra en pantalla la variacion de PC y LR
+        mvprintw(27,83,"BANDERAS");                                     //Se muestra en pantalla la variacion de Banderas
+        mvprintw(26,83,"N=%d\n",Banderas[0]);
+        mvprintw(27,83,"Z=%d\n",Banderas[1]);
+        mvprintw(28,83,"C=%d\n",Banderas[2]);
+        mvprintw(29,83,"V=%d\n",Banderas[3]);
+        mvprintw(5,70,"%s",instructions[registro[15]]);                //instruccion que se ejecutara
+
+        border( ACS_VLINE, ACS_VLINE,ACS_HLINE, ACS_HLINE,ACS_ULCORNER, ACS_URCORNER,ACS_LLCORNER, ACS_LRCORNER	);  //Bordes de la pantalla
+
+        instruction = getInstruction(instructions[registro[15]]); // Instrucción en la posición PC
+        decodeInstruction(instruction,Banderas,registro,SRAM,&mnemonico_hex);           //Realiza la funcion indicada por el mnemonico
+        mvprintw(6,70,"0x%0.4X",mnemonico_hex);
+        refresh();
         entrada=getch();    //Guardamos lo que se ingrese en el teclado
-
-        if(entrada=='m')
-        {
-            erase();
-            MostrarSRAM(SRAM);
-        }
 
         if(entrada=='s')
         {
@@ -107,39 +111,12 @@ int main(void)
         if(entrada=='p')
         {
             timeout(1000);
-            entrada='p';
-            instruction = getInstruction(instructions[registro[15]]); // Instrucción en la posición PC
-            decodeInstruction(instruction,Banderas,registro,SRAM,&mnemonico_hex);           //Realiza la funcion indicada por el mnemonico
-            mvprintw(39,70,"0x%0.4X",mnemonico_hex);
-            mvprintw(38,8,"PC: %d\t\tLR: %d",registro[15]*2,registro[14]*2);
+
         }
 
         if(entrada==' ')
             {
-                erase();
-                mvprintw(1,40,"EMULADOR ARM Cortex M0");                          //Imprime el titulo de la pantalla
-                mvprintw(21,4,"Presiones p, para ejecutar con tiempo de 1 seg");   //Se imprimen las opciones para correr el codigo en pantalla
-                mvprintw(22,4,"Presiones s, para detener ejecucion con tiempo");
-                mvprintw(23,4,"Presiones espacio, para ejecutar paso a paso");
-                mvprintw(24,4,"Presiones o, para salir");
-                mvprintw(25,4,"Presiones m, para mostrar SRAM");
-                showPorts();
-                MostrarRegistro(registro);                                   //Imprimimos en pantalla los valores de los registros
-                init_pair(1,COLOR_WHITE,COLOR_CYAN);
-                mvprintw(38,8,"PC: %d\t\tLR: %d",registro[15]*2,registro[14]*2);  //Se muestra en pantalla la variacion de PC y LR
-                mvprintw(27,83,"BANDERAS");                                     //Se muestra en pantalla la variacion de Banderas
-                mvprintw(29,83,"N=%d\n",Banderas[0]);
-                mvprintw(30,83,"Z=%d\n",Banderas[1]);
-                mvprintw(31,83,"C=%d\n",Banderas[2]);
-                mvprintw(32,83,"V=%d\n",Banderas[3]);
-                mvprintw(38,70,"%s",instructions[registro[15]]);                //instruccion que se ejecutara
-
-
-                border( ACS_VLINE, ACS_VLINE,ACS_HLINE, ACS_HLINE,ACS_ULCORNER, ACS_URCORNER,ACS_LLCORNER, ACS_LRCORNER	);  //Bordes de la pantalla
-
-                instruction = getInstruction(instructions[registro[15]]); // Instrucción en la posición PC
-                decodeInstruction(instruction,Banderas,registro,SRAM,&mnemonico_hex);           //Realiza la funcion indicada por el mnemonico
-                mvprintw(39,70,"0x%0.4X",mnemonico_hex);
+               timeout(-1);
             }
 
         if(entrada=='o')

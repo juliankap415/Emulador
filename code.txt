@@ -1,3 +1,4 @@
+MOVS R0,#4
 NOP   
 NOP  
 NOP  
