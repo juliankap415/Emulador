@@ -10,7 +10,7 @@
 /*===================================================*/
 
 #define HIGH	1
-#define LOW		0	
+#define LOW		0
 
 #define Read	1
 #define Write	0
@@ -27,7 +27,7 @@ typedef struct{
 	uint8_t Interrupts;
 }port_t;
 
-void IOAccess(uint8_t address, uint8_t* data, uint8_t r_w);
+void IOAccess(uint8_t address, uint8_t *data, uint8_t r_w);
 void changePinPortA(uint8_t pin, uint8_t value);
 void changePinPortB(uint8_t pin, uint8_t value);
 void initIO(void);

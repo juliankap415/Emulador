@@ -38,7 +38,7 @@ void ROR(uint32_t *Rdn,uint32_t Rm,int *flags);
 * \param *flags Arreglo donde se almacenaran las banderas
 * \return No hay retorno de la funcion
 */
-void ASR(uint32_t *Rdn,uint32_t Rm,int *flags);
+void ASR(uint32_t *Rdn,uint32_t Rm,uint32_t Rn,int *flags);
 
 /**
 * \brief Operacion logica AND entre un dato y el complemento del otro dato

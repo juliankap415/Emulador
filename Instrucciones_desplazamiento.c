@@ -53,17 +53,17 @@ void ROR(uint32_t *Rdn,uint32_t Rm,int *flags)
 		*(flags+2)=1;
 }
 
-void ASR(uint32_t *Rdn,uint32_t Rm,int *flags)
+void ASR(uint32_t *Rdn,uint32_t Rm,uint32_t Rn,int *flags)
 {
     uint32_t aux;
 
-    aux=*Rdn>>31;     //conocer el signo del numero
+    aux=Rm>>31;     //conocer el signo del numero
     aux=aux<<31;
-    *Rdn=*Rdn>>Rm;
-    *Rdn=*Rdn+aux;
+    Rm=Rm>>Rn;
+    *Rdn=Rm+aux;
     BANDERAS_2(*Rdn,flags);
 
-	if((*Rdn>>(Rm-1)&(1))==0)
+	if((Rm>>(Rn-1)&(1))==0)
 		*(flags+2)=0;
 	else
 		*(flags+2)=1;

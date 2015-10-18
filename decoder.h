@@ -39,7 +39,7 @@ typedef struct
     \brief Decodifica la instrucción y la ejecuta.
     \param instruction instrucción a decodificar y ejecutar.
 */
-void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registro,uint8_t *SRAM);
+void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registro,uint8_t *SRAM,uint16_t *mnemonico_hex);
 
 /** \fn instruction_t getInstruction(char* instStr)
     \brief Obtiene la instrucción separada por partes.

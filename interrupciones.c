@@ -1,6 +1,6 @@
 #include "interrupciones.h"
 
-void NVIC(uint32_t *registro,int *Banderas,uint8_t *SRAM,int *interrupciones,int *Indicador)
+void NVIC(uint32_t *registro,int *Banderas,uint8_t *SRAM,uint8_t *interrupciones,int *Indicador)
 {
     int i;
     uint8_t banderas;
@@ -16,7 +16,7 @@ void NVIC(uint32_t *registro,int *Banderas,uint8_t *SRAM,int *interrupciones,int
     }
     else
     {
-        for(i=0;i<32;i++)
+        for(i=0;i<16;i++)
         {
             if(interrupciones[i]==1)
             {
