@@ -12,22 +12,22 @@ int i;
 
 void LDR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     *Rd= *(SRAM+address);
 
     for (i=1 ; i<4 ; i++)
-        *Rd= *Rd + (((uint32_t)(*(SRAM+address+i)))<<8*i);
+        *Rd= *Rd  + (((uint32_t)(*(SRAM+address+i)))<<8*i);
 }
 
 void LDRB(uint32_t *Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     *Rd = *(SRAM+address);
 }
 
 void LDRH(uint32_t *Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     *Rd = *(SRAM+address);
     *Rd = *Rd + (((uint32_t)(*(SRAM+address+1)))<<8);
 }
@@ -36,7 +36,7 @@ void LDRSB(uint32_t *Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
     uint32_t aux1,aux2,aux3=~0;
 
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     address = *(SRAM+address);
 
     aux1 = address;
@@ -55,7 +55,7 @@ void LDRSH(uint32_t *Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
     uint32_t aux1,aux2,aux3=~0;
 
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     data = *(SRAM+address);
     data = data + (((uint32_t)(*(SRAM+address+1)))<<8);     // *data=SRAM[address,2]
 
@@ -75,7 +75,7 @@ void LDRSH(uint32_t *Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 
 void STR(uint32_t Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     for (i=0 ; i<4 ; i++)
     {
         *(SRAM+address + i) = (uint8_t) (Rd>>(i*8));
@@ -84,13 +84,13 @@ void STR(uint32_t Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 
 void STRB(uint32_t Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     *(SRAM+address) = (uint8_t)Rd;
 }
 
 void STRH(uint32_t Rd,uint32_t Rn,uint32_t Rm,uint8_t *SRAM)
 {
-    address = Rn+Rm;
+    address = (Rn+Rm)&255;
     *(SRAM+address) = (uint8_t)Rd;
     *(SRAM+address+1) = (uint8_t)(Rd>>8);
 }

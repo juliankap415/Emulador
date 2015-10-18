@@ -29,7 +29,8 @@ int main(void)
                                                 //registro[13]=SP
                                                 //registro[15]=PC
                                                 //registro[14]=LR
-    uint8_t SRAM[128],data=0;
+    uint8_t SRAM[128];
+    //uint8_t data=0;
     uint16_t *mnemonico_hex=0;
    // int *Indicador=0;
                                   //variable para guardar la entrada por parte del teclado
