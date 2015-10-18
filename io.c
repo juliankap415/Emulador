@@ -23,10 +23,8 @@ void initIO(void)
 
 void changePinPortA(uint8_t pin, uint8_t value)
 {
-	if( ( (PORTA.Pins & (1<<pin)) != (value<<pin) ) &&
-		( PORTA.Interrupts & (1<<pin) ) )
+	if( ( (PORTA.Pins & (1<<pin)) != (value<<pin) ) && ( PORTA.Interrupts & (1<<pin) ) )
 		irq[pin] = 1;
-
 	PORTA.Pins = (PORTA.Pins & ~(1<<pin)) | value<<pin;
 }
 

@@ -187,7 +187,7 @@ void decodeInstruction(instruction_t instruction,int *Banderas,uint32_t *registr
     {
         *mnemonico_hex=(191<<8);
         NOP();
-        registro[15]++;
+        (*(registro+15))++;
     }
 
     if( strcmp(instruction.mnemonic,"ADCS") == 0 )
