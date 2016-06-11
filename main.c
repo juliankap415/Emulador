@@ -8,7 +8,7 @@
 #include "io.h"
 
 /** \mainpage Practica #1 Emulador ARM Cortex -M0
-* Documentacion pertinente del sofware realizado para realizar el Emulador del procesador ARM Cortex -M0
+* Documentacion pertinente del software realizado para realizar el Emulador del procesador ARM Cortex -M0
 */
 
 /**\file main.c
@@ -98,7 +98,7 @@ int main(void)
 
         border( ACS_VLINE, ACS_VLINE,ACS_HLINE, ACS_HLINE,ACS_ULCORNER, ACS_URCORNER,ACS_LLCORNER, ACS_LRCORNER	);  //Bordes de la pantalla
 
-        instruction = getInstruction(instructions[registro[15]]); // Instrucción en la posición PC
+        instruction = getInstruction(instructions[registro[15]]); // Instrucciï¿½n en la posiciï¿½n PC
         decodeInstruction(instruction,Banderas,registro,SRAM,&mnemonico_hex);           //Realiza la funcion indicada por el mnemonico
         mvprintw(6,70,"0x%0.4X",mnemonico_hex);
         refresh();
